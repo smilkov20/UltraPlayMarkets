@@ -1,18 +1,21 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Timers;
+using UltraPlayMarkets.Utilities;
 
 namespace UltraPlayMarkets
 {
     public class Program
     {
+
+        private static readonly Timer _dataRefreshTimer = new Timer(60000); // 60 sec
+
         public static void Main(string[] args)
         {
+            MarketsUpdate();
+            _dataRefreshTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            _dataRefreshTimer.Start();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -22,5 +25,15 @@ namespace UltraPlayMarkets
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            MarketsUpdate();
+        }
+        private static void MarketsUpdate()
+        {
+            XMLReader reader = new XMLReader();
+            reader.Read();
+        }
     }
 }

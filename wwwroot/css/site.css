@@ -19,9 +19,11 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: #bdbfc1;
   background-color: #1b6ec2;
   border-color: #1861ac;
+
+
 }
 
 /* Sticky footer styles
@@ -59,8 +61,8 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;

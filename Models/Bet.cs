@@ -10,6 +10,8 @@ namespace UltraPlayMarkets.Models
 
         public bool IsLive { get; set; }
 
+        public int MatchId { get; set; }
+
         public List<Odd> Odds { get; set; }
 
     }

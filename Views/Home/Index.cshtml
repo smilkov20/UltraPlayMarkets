@@ -1,8 +1,21 @@
-﻿@{
+﻿@model List<UltraPlayMarkets.Models.Match>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+
+    @foreach (var match in Model.ToList())
+    {
+    <header>
+        <div class="match container" style="background:#252c35; color:#bdbfc1">@match.Name vs @match.OpponentName  @match.StartDate.ToString("dd.MM.yyyy HH:mm")</div>
+        <div class="match markets" style="background:#151c24; color:#bdbfc1">
+            @if (match.Bets != null)
+            {
+                @Html.Partial("BetsPartial", @match.Bets);
+            }
+        </div>
+    </header>
+    }
 </div>
