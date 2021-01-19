@@ -10,6 +10,8 @@
 
         public string SpecialBetValue { get; set; }
 
+        public bool IsGuest { get; set; }
+
         public int BetId { get; set; }
     }
 }

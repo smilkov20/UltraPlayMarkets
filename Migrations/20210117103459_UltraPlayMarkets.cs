@@ -91,7 +91,8 @@ namespace UltraPlayMarkets.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<double>(type: "float", nullable: false),
                     SpecialBetValue = table.Column<double>(type: "nvarchar(10)", nullable: true),
-                    BetId = table.Column<int>(type: "int", nullable: true)
+                    BetId = table.Column<int>(type: "int", nullable: true),
+                    IsGuest = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {

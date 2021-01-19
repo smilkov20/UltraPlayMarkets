@@ -117,6 +117,10 @@ namespace UltraPlayMarkets.Migrations
                     b.Property<double>("Value")
                         .HasColumnType("float");
 
+
+                    b.Property<bool>("IsGuest")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BetId");

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Xml;
+
 using UltraPlayMarkets.Data;
 using UltraPlayMarkets.Models;
 using UltraPlayMarkets.Utilities.Enums;
@@ -14,27 +13,30 @@ namespace UltraPlayMarkets.Utilities
     public class XMLReader
     {
 
-        public string URLString = "https://sports.ultraplay.net/sportsxml?clientKey=b4dde172-4e11-43e4-b290-abdeb0ffd711&sportId=2357&days=2";
+        private string URLString = "https://sports.ultraplay.net/sportsxml?clientKey=b4dde172-4e11-43e4-b290-abdeb0ffd711&sportId=2357&days=2";
 
         public void Read()
         {
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(URLString);
-
-
-            string text;
+            string xmlText;
             using (var webclient = new WebClient())
             {
-                text = webclient.DownloadString(URLString);
+                xmlText = webclient.DownloadString(URLString);
             }
 
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(text);
+            xmlDocument.LoadXml(xmlText);
 
             using (var db = new MarketsDbContext())
             {
+                db.Odd.RemoveRange(db.Odd);
+                db.Bet.RemoveRange(db.Bet);
+                db.Match.RemoveRange(db.Match);
+                db.Event.RemoveRange(db.Event);
+                db.Sports.RemoveRange(db.Sports);
+                db.SaveChanges();
+
                 var nodes = xmlDocument.SelectNodes("//Sport");
-            
+
                 foreach (XmlNode node in nodes)
                 {
                     Sport entity = new Sport();
@@ -42,14 +44,7 @@ namespace UltraPlayMarkets.Utilities
                     entity.Name = node.Attributes.GetNamedItem("Name").Value;
                     entity.Id = int.Parse(node.Attributes.GetNamedItem("ID").Value);
 
-                    if (!db.Sports.Any(x => x == entity))
-                    {
-                        db.Sports.Add(entity);
-                    }
-                    else
-                    {
-                        db.Sports.Update(entity);
-                    }
+                    db.Sports.Add(entity);
                 }
 
                 nodes = xmlDocument.SelectNodes("//Sport/Event");
@@ -68,14 +63,7 @@ namespace UltraPlayMarkets.Utilities
                     entity.CategoryId = int.Parse(node.Attributes.GetNamedItem("CategoryID").Value);
                     entity.SportId = int.Parse(node.ParentNode.Attributes.GetNamedItem("ID").Value);
 
-                    if (!db.Event.Any(x => x == entity))
-                    {
-                        db.Event.Add(entity);
-                    }
-                    else
-                    {
-                        db.Event.Update(entity);
-                    }
+                    db.Event.Add(entity);
                 }
 
                 nodes = xmlDocument.SelectNodes("//Sport/Event/Match");
@@ -95,14 +83,7 @@ namespace UltraPlayMarkets.Utilities
                     entity.MatchType = entityMatchType;
                     entity.EventId = int.Parse(node.ParentNode.Attributes.GetNamedItem("ID").Value);
 
-                    if (!db.Match.Any(x => x == entity))
-                    {
-                        db.Match.Add(entity);
-                    }
-                    else
-                    {
-                        db.Match.Update(entity);
-                    }
+                    db.Match.Add(entity);
                 }
 
                 nodes = xmlDocument.SelectNodes("//Sport/Event/Match/Bet");
@@ -116,17 +97,13 @@ namespace UltraPlayMarkets.Utilities
                     entity.IsLive = bool.Parse(node.Attributes.GetNamedItem("IsLive").Value);
                     entity.MatchId = int.Parse(node.ParentNode.Attributes.GetNamedItem("ID").Value);
 
-                    if (!db.Bet.Any(x => x == entity))
-                    {
-                        db.Bet.Add(entity);
-                    }
-                    else
-                    {
-                        db.Bet.Update(entity);
-                    }
+                    db.Bet.Add(entity);
                 }
 
                 nodes = xmlDocument.SelectNodes("//Sport/Event/Match/Bet/Odd");
+
+                bool isGuestOdd = false;
+                int lastBetId = -1;
 
                 foreach (XmlNode node in nodes)
                 {
@@ -137,15 +114,38 @@ namespace UltraPlayMarkets.Utilities
                     entity.Value = double.Parse(node.Attributes.GetNamedItem("Value").Value);
                     entity.SpecialBetValue = node.Attributes.GetNamedItem("SpecialBetValue")?.Value;
                     entity.BetId = int.Parse(node.ParentNode.Attributes.GetNamedItem("ID").Value);
+                    entity.IsGuest = false;
 
-                    if (!db.Odd.Any(x => x == entity))
+                    if (lastBetId == entity.BetId)
                     {
-                        db.Odd.Add(entity);
+                        switch (entity.Name)
+                        {
+                            case "1":
+                                isGuestOdd = false;
+                                break;
+                            case "2":
+                                isGuestOdd = true;
+                                break;
+                            default:
+                                isGuestOdd = !isGuestOdd;
+                                break;
+                        }
+                        entity.IsGuest = isGuestOdd;
                     }
                     else
                     {
-                        db.Odd.Update(entity);
+                        if (lastBetId != -1)
+                        {
+                            isGuestOdd = true;
+                        }    
+                        
                     }
+
+
+                    lastBetId = entity.BetId;
+
+
+                    db.Odd.Add(entity);
                 }
 
                 db.SaveChanges();

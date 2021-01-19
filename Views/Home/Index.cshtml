@@ -1,21 +1,71 @@
-﻿@model List<UltraPlayMarkets.Models.Match>
+﻿@model List<UltraPlayMarkets.Models.GetPreviewMatches>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
+
+
+
 <div class="container">
+
+    @{
+        int lastMainMarketsCounter = 0;
+    }
 
     @foreach (var match in Model.ToList())
     {
-    <header>
-        <div class="match container" style="background:#252c35; color:#bdbfc1">@match.Name vs @match.OpponentName  @match.StartDate.ToString("dd.MM.yyyy HH:mm")</div>
-        <div class="match markets" style="background:#151c24; color:#bdbfc1">
-            @if (match.Bets != null)
+        @if (match.MainRow == 1)
+        {
+            @if (lastMainMarketsCounter > 0)
             {
-                @Html.Partial("BetsPartial", @match.Bets);
+                <div class="row" style="background:#808080; color:#bdbfc1; margin-bottom:5px">
+                    <div class="col text-center" style="background:#808080; color:#bdbfc1">SHOW ALL @lastMainMarketsCounter MARKETS</div>
+                </div>
             }
+        }
+
+        <div class="row" style="background:#252c35; color:#bdbfc1">
+
+            @if (match.MainRow == 1)
+            {
+                lastMainMarketsCounter = match.AllMarkets;
+
+                <div class="col" style="background:#252c35; color:#bdbfc1">
+                    @if (match.IsLive)
+                    {<p>LIVE</p>}
+                    else
+                    {<p>PREMATCH</p>}
+                </div>
+                <div class="col" style="background:#252c35; color:#bdbfc1">
+                    @match.EventName
+                </div>
+            }
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                @match.BetName
+            </div>
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                @match.PlayerOne
+            </div>
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                @match.HomecomingValue
+            </div>
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                VS
+            </div>
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                @match.GuestValue
+            </div>
+
+            <div class="col" style="background:#252c35; color:#bdbfc1">
+                @match.PlayerTwo
+            </div>
+
         </div>
-    </header>
-    }
+     }
 </div>

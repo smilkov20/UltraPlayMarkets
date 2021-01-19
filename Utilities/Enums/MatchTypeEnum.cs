@@ -4,6 +4,6 @@
     {
         Prematch = 0,
         Live = 1,
-        Outright = 2
+        OutRight = 2
     }
 }

@@ -43,7 +43,34 @@ namespace UltraPlayMarkets.Controllers
 
                 }
 
-                return this.View(allMatches);
+                
+
+                var entities = (from GetPreviewMatches in db.GetPreviewMatches
+                                select new GetPreviewMatches
+                                {
+                                    MainRow = GetPreviewMatches.MainRow,
+                                    AllMarkets = GetPreviewMatches.AllMarkets,
+                                    HeaderRank = GetPreviewMatches.HeaderRank,
+                                    DetailsRank = GetPreviewMatches.DetailsRank,
+                                    IsLive = GetPreviewMatches.IsLive,
+                                    EventId = GetPreviewMatches.EventId,
+                                    EventName = GetPreviewMatches.EventName,
+                                    MatchId = GetPreviewMatches.MatchId,
+                                    PlayerOne = GetPreviewMatches.PlayerOne,
+                                    PlayerTwo = GetPreviewMatches.PlayerTwo,
+                                    StartDate = GetPreviewMatches.StartDate,
+                                    BetId = GetPreviewMatches.BetId,
+                                    BetName = GetPreviewMatches.BetName,
+                                    HomecomingName = GetPreviewMatches.HomecomingName,
+                                    HomecomingValue = GetPreviewMatches.HomecomingValue,
+                                    HomecomingSBV = GetPreviewMatches.HomecomingSBV,
+                                    GuestName = GetPreviewMatches.GuestName,
+                                    GuestValue = GetPreviewMatches.GuestValue,
+                                    GuestSBV = GetPreviewMatches.GuestSBV
+                                }).ToList();
+
+
+                return this.View(entities);
             }
         }
 
