@@ -1,0 +1,28 @@
+﻿body {
+}
+
+div.row {
+    color: #bdbfc1;
+    background-color: #252c35;
+    border: 1px;
+    border-style: groove;
+    border-color: #11171f;
+}
+
+div.col-md-auto {
+    color: #bdbfc1;
+    background-color: #252c35;
+    min-height: 30px;
+}
+
+#HeaderRow {
+    background-color: #252c35;
+    height:30px;
+}
+
+#DetailRow {
+    height: 100px;
+    line-height: 98px;
+    margin-bottom: 5px;
+    background-color: #1a2129;
+}

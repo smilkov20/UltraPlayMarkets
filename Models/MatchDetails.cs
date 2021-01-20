@@ -2,13 +2,9 @@
 
 namespace UltraPlayMarkets.Models
 {
-    public class MarketDetails
+    public class MatchDetails
     {
         public bool IsLive { get; set; }
-
-        public int EventId { get; set; }
-
-        public string EventName { get; set; }
 
         public int MatchId { get; set; }
 
@@ -22,16 +18,16 @@ namespace UltraPlayMarkets.Models
 
         public string BetName { get; set; }
 
-        public int OddId { get; set; }
+        public string HomecomingName { get; set; }
 
-        public string OddName { get; set; }
+        public double? HomecomingValue { get; set; }
 
-        public double Value { get; set; }
+        public string HomecomingSBV { get; set; }
 
-        public double SpecialBetValue { get; set; }
+        public string GuestName { get; set; }
 
-        public Odd Odds { get; set; }
+        public double? GuestValue { get; set; }
 
-
+        public string GuestSBV { get; set; }
     }
 }

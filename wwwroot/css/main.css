@@ -1,0 +1,68 @@
+﻿body {
+}
+
+div.row {
+    color: #bdbfc1;
+    background-color: #252c35;
+    border: 1px;
+    border-style: groove;
+    border-color: #11171f;
+}
+
+
+div.col-md-auto {
+    color: #bdbfc1;
+    background-color: #252c35;
+    min-height: 30px;
+}
+
+.col.text-center {
+    background-color: #808080;
+    color: #bdbfc1;
+}
+
+.col-md-auto.border-0.rounded {
+    background-color: #11171f;
+    min-height: 30px;
+    height: 30px;
+    width: 55px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    margin: 3px;
+}
+
+/*#IsLive{
+    position:absolute;
+    left:5%;
+}
+
+#Game{
+    position:absolute;
+    left: 15%;
+}
+
+#Versus {
+    position: absolute;
+    left: 50%;
+}
+
+#PlayerOne {
+    position: absolute;
+    left: 35%;
+}
+
+#PlayerOneCoef {
+    position: absolute;
+    left: 45%;
+}
+
+#PlayerTwo {
+    position: absolute;
+    left: 60%;
+}
+
+#PlayerTwoCoef {
+    position: absolute;
+    left: 55%;
+}*/

@@ -74,9 +74,32 @@ namespace UltraPlayMarkets.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        public IActionResult MatchInfo(int id)
         {
-            return View();
+            using (var db = new MarketsDbContext())
+            {
+                var entities = (from MatchDetails in db.MatchDetails
+                                where MatchDetails.MatchId == id
+                                select new MatchDetails
+                                {
+                                    IsLive = MatchDetails.IsLive,
+                                    MatchId = MatchDetails.MatchId,
+                                    PlayerOne = MatchDetails.PlayerOne,
+                                    PlayerTwo = MatchDetails.PlayerTwo,
+                                    StartDate = MatchDetails.StartDate,
+                                    BetId = MatchDetails.BetId,
+                                    BetName = MatchDetails.BetName,
+                                    HomecomingName = MatchDetails.HomecomingName,
+                                    HomecomingValue = MatchDetails.HomecomingValue,
+                                    HomecomingSBV = MatchDetails.HomecomingSBV,
+                                    GuestName = MatchDetails.GuestName,
+                                    GuestValue = MatchDetails.GuestValue,
+                                    GuestSBV = MatchDetails.GuestSBV
+                                }).ToList();
+
+
+                return View(entities);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

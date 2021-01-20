@@ -71,16 +71,26 @@ namespace UltraPlayMarkets.Utilities
                 foreach (XmlNode node in nodes)
                 {
                     Match entity = new Match();
+
+                    MatchTypeEnum entityMatchType;
+                    Enum.TryParse(node.Attributes.GetNamedItem("MatchType").Value, out entityMatchType);                  
+                    entity.MatchType = entityMatchType;
+
                     var nameValue = node.Attributes.GetNamedItem("Name").Value;
+
 
                     var splitValues = nameValue.Split(" - ");
                     entity.Name = splitValues[0].TrimStart().TrimEnd();
-                    entity.OpponentName = splitValues[1].TrimStart().TrimEnd();
+
+                    // Skip OpponentName if Name attribute contains only one name
+                    if (splitValues.Length > 1)
+                    {
+                        entity.OpponentName = splitValues[1].TrimStart().TrimEnd();
+
+                    }
                     entity.Id = int.Parse(node.Attributes.GetNamedItem("ID").Value);
                     entity.StartDate = DateTime.Parse(node.Attributes.GetNamedItem("StartDate").Value);
-                    MatchTypeEnum entityMatchType;
-                    Enum.TryParse(node.Attributes.GetNamedItem("MatchType").Value, out entityMatchType);
-                    entity.MatchType = entityMatchType;
+                    
                     entity.EventId = int.Parse(node.ParentNode.Attributes.GetNamedItem("ID").Value);
 
                     db.Match.Add(entity);

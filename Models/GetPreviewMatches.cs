@@ -34,12 +34,12 @@ namespace UltraPlayMarkets.Models
 
         public double? HomecomingValue { get; set; }
 
-        public double? HomecomingSBV { get; set; }
+        public string HomecomingSBV { get; set; }
 
         public string GuestName { get; set; }
 
         public double? GuestValue { get; set; }
 
-        public double? GuestSBV { get; set; }
+        public string GuestSBV { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace UltraPlayMarkets.Data
         public DbSet<Bet> Bet { get; set; }
 
         public DbSet<GetPreviewMatches> GetPreviewMatches { get; set; }
+        public DbSet<MatchDetails> MatchDetails { get; set; }
 
 
         private const string ConnectionString = @"Server=DESKTOP-55QSCEM\DEVSERVER;Database=MarketsTask;Integrated Security=True;";
@@ -26,6 +27,7 @@ namespace UltraPlayMarkets.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GetPreviewMatches>().HasNoKey();
+            modelBuilder.Entity<MatchDetails>().HasNoKey();
         }
 
     }

@@ -1,8 +1,0 @@
-﻿@model List<UltraPlayMarkets.Models.Bet>
-
-<div class="text-center" style="background:#151c24; color:#bdbfc1">
-    @foreach (var bet in Model)
-    {
-        <p>@bet.Name @bet.Odds[0].Name @bet.Odds[0].Value @bet.Odds[1].Name @bet.Odds[1].Value </p>
-    }
-</div>
