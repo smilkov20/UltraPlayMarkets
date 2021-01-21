@@ -6,70 +6,105 @@
 
 <link rel="stylesheet" href="~/css/main.css" />
 
-
 <div class="container">
-
     @{
         int lastMainMarketsCounter = 0;
+        string rowClass = "odd-bgcolor";
     }
-
     @foreach (var match in Model.ToList())
     {
         @if (match.MainRow == 1)
         {
             @if (lastMainMarketsCounter > 0)
             {
-                <div class="row" style="margin-bottom : 5px;">
-                    <div class="col text-center">
+                rowClass = "odd-bgcolor";
+                <div>
+                    <div class="markets">
                         @Html.ActionLink("SHOW ALL " + lastMainMarketsCounter + " MARKETS", "MatchInfo", "Home", new { id = match.MatchId }, new { @class = "info" })
                     </div>
                 </div>
             }
         }
 
-        <div class="row">
-
+        <div class="grid-container @rowClass">
+            @{
+                rowClass = rowClass == "odd-bgcolor" ? "even-bgcolor" : "odd-bgcolor";
+            }
             @if (match.MainRow == 1)
             {
                 lastMainMarketsCounter = match.AllMarkets;
+                <div class="left-group">
+                    <div>
+                        @if (match.IsLive)
+                        {
+                            <span>LIVE</span>
+                        }
+                        else
+                        {
+                            <span>PREMATCH</span>
+                        }
+                    </div>
+                    <div>
+                        @match.EventName
+                    </div>
+                    <div>
+                        @match.BetName
+                    </div>
 
-                <div class="col-md-auto" id="IsLive">
-                    @if (match.IsLive)
-                    {
-                        <p>LIVE</p>
-                    }
-                    else
-                    {
-                        <p>PREMATCH</p>
-                    }
+                    <div class="playerOne active">
+                        @match.PlayerOne
+                    </div>
                 </div>
-                <div class="col-md-auto" id="Game">
-                    @match.EventName
+                <div class="coefficient active">
+                    @match.HomecomingValue
+                </div>
+
+                <div class="versus">
+                    VS
+                </div>
+
+                <div class="coefficient active">
+                    @match.GuestValue
+                </div>
+
+                <div class="right-group active">
+                    <div class="playerTwo active">
+                        @match.PlayerTwo
+                    </div>
                 </div>
             }
-            <div class="col-md-auto">
-                @match.BetName
-            </div>
+            else
+            {
+                <div class="left-group detail">
+                    <div>
+                        @match.BetName
+                    </div>
 
-            <div class="col-md-auto" id="PlayerOne">
-                @match.PlayerOne
-            </div>
+                    <div class="playerOne active">
+                        @match.PlayerOne
+                    </div>
+                </div>
 
-            <div class="col-md-auto border-0 rounded" id="PlayerOneCoef">
-                @match.HomecomingValue
-            </div>
+                <div class="coefficient active">
+                    @match.HomecomingValue
+                </div>
 
-            <div class="col-md-auto" id="Versus">
-                VS
-            </div>
+                <div class="versus">
+                    VS
+                </div>
 
-            <div class="col-md-auto border-0 rounded" id="PlayerTwoCoef">
-                @match.GuestValue
-            </div>
+                <div class="coefficient active">
+                    @match.GuestValue
+                </div>
 
-            <div class="col-md-auto" id="PlayerTwo">
-                @match.PlayerTwo
-            </div>
+                <div class="right-group">
+                    <div class="playerTwo active">
+                        @match.PlayerTwo
+                    </div>
+                </div>
+            }
+
+
         </div>
     }
 </div>

@@ -1,68 +1,84 @@
 ﻿body {
 }
 
-div.row {
-    color: #bdbfc1;
-    background-color: #252c35;
-    border: 1px;
-    border-style: groove;
-    border-color: #11171f;
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
 }
 
-
-div.col-md-auto {
-    color: #bdbfc1;
-    background-color: #252c35;
-    min-height: 30px;
+a:hover{
+    text-decoration: none;
+    color: white;
 }
 
-.col.text-center {
+.grid-container {
+    background-color: #252c35;
+    color: #bdbfc1;
+    display: grid;
+    justify-content: stretch;
+    align-content: stretch;
+    grid-gap: 10px;
+    grid-template-columns: 2fr 50px 50px 50px 1fr;
+    padding: 10px;
+}
+
+.coefficient {
+    background-color: #11171f;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.versus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.detail {
+    padding-left: 15px;
+}
+
+.playerOne {
+    text-align: right;
+    flex-grow: 2;
+}
+
+.active {
+    color: white;
+    font-weight: bold;
+}
+
+.markets {
+    display: flex;
     background-color: #808080;
     color: #bdbfc1;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 5px;
 }
 
-.col-md-auto.border-0.rounded {
-    background-color: #11171f;
-    min-height: 30px;
-    height: 30px;
-    width: 55px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 30px;
-    margin: 3px;
+.odd-bgcolor {
+    background-color: #37414f;
 }
 
-/*#IsLive{
-    position:absolute;
-    left:5%;
+.even-bgcolor {
+    background-color: #252c35;
 }
-
-#Game{
-    position:absolute;
-    left: 15%;
-}
-
-#Versus {
-    position: absolute;
-    left: 50%;
-}
-
-#PlayerOne {
-    position: absolute;
-    left: 35%;
-}
-
-#PlayerOneCoef {
-    position: absolute;
-    left: 45%;
-}
-
-#PlayerTwo {
-    position: absolute;
-    left: 60%;
-}
-
-#PlayerTwoCoef {
-    position: absolute;
-    left: 55%;
-}*/

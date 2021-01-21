@@ -1,0 +1,30 @@
+﻿body {
+}
+
+
+.grid-container {
+    background-color: #252c35;
+    color: #bdbfc1;
+    display: grid;
+}
+
+.grid-row {
+    justify-content: stretch;
+    align-content: stretch;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    padding: 10px;
+}
+
+.grid-col {
+    justify-content: stretch;
+    align-content: stretch;
+    grid-gap: 10px;
+    grid-template-rows: 2fr 50px 50px 1fr;
+    padding: 10px;
+}
+
+.testclass{
+    color: aqua;
+    background-color:antiquewhite;
+}

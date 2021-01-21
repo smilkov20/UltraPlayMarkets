@@ -1,39 +1,43 @@
 ﻿@model List<UltraPlayMarkets.Models.MatchDetails>
 
+@{
+    ViewData["Title"] = "Match info";
+}
 
-<link rel="stylesheet" href="~/css/details.css" />
+
+<link rel="stylesheet" href="~/css/match.css" />
+
+<p class="testclass">test ffs</p>
 
 <div class="container">
-
-        <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
-
+    <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
 </div>
 
-<div class="container">
 
+<div class="container">
     @foreach (var match in Model.ToList())
     {
-        <div class="row justify-content-center" id="HeaderRow">
-            <div class="col-md-auto" >
+        <div class="grid-container">
+            <div class="grid-row">
                 @match.BetName
             </div>
-        </div>
-        <div class="row justify-content-center" id="DetailRow">
-            <div class="col-md-auto">
-                @match.HomecomingName
-            </div>
-            <div class="col-md-auto" id="Coef">
-                @match.HomecomingValue
-            </div>
-            @if (match.GuestName != null)
-            {
-                <div class="col-md-auto">
-                    @match.GuestValue
+            <div class="grid-col">
+                <div>
+                    @match.HomecomingName
                 </div>
-                <div class="col-md-auto">
-                    @match.GuestName
+                <div>
+                    @match.HomecomingValue
                 </div>
-            }
+                @if (match.GuestName != null)
+                {
+                    <div>
+                        @match.GuestValue
+                    </div>
+                    <div>
+                        @match.GuestName
+                    </div>
+                }
+            </div>
 
         </div>
     }
