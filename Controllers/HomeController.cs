@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Timers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 
 using UltraPlayMarkets.Data;
 using UltraPlayMarkets.Models;
-using UltraPlayMarkets.Utilities;
 
 namespace UltraPlayMarkets.Controllers
 {
@@ -27,23 +24,6 @@ namespace UltraPlayMarkets.Controllers
             using (var db = new MarketsDbContext())
             {
                 DateTime dateFilter = DateTime.Now.AddHours(24);
-
-                var allMatches = db.Match.Where(x => x.StartDate <= dateFilter && x.StartDate >= DateTime.Now).ToList();
-
-                foreach (var match in allMatches)
-                {
-                    List<Bet> bets = db.Bet.Where(b => b.MatchId == match.Id).ToList();
-
-                    foreach (var bet in bets)
-                    {
-                        bet.Odds = db.Odd.Where(o => o.BetId == bet.Id).ToList();
-                    }
-
-                    match.Bets = bets;
-
-                }
-
-                
 
                 var entities = (from GetPreviewMatches in db.GetPreviewMatches
                                 select new GetPreviewMatches
@@ -96,7 +76,6 @@ namespace UltraPlayMarkets.Controllers
                                     GuestValue = MatchDetails.GuestValue,
                                     GuestSBV = MatchDetails.GuestSBV
                                 }).ToList();
-
 
                 return View(entities);
             }

@@ -20,7 +20,7 @@ namespace UltraPlayMarkets.Utilities
             string xmlText;
             using (var webclient = new WebClient())
             {
-                xmlText = webclient.DownloadString(URLString);
+                xmlText = webclient.DownloadString(GlobalConstants.URLString);
             }
 
             XmlDocument xmlDocument = new XmlDocument();
@@ -144,11 +144,7 @@ namespace UltraPlayMarkets.Utilities
                     }
                     else
                     {
-                        if (lastBetId != -1)
-                        {
-                            isGuestOdd = true;
-                        }    
-                        
+                        isGuestOdd = false;
                     }
 
 

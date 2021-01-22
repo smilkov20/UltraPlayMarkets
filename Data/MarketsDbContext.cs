@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using UltraPlayMarkets.Models;
-
+using UltraPlayMarkets.Utilities;
 
 namespace UltraPlayMarkets.Data
 {
@@ -16,12 +16,9 @@ namespace UltraPlayMarkets.Data
         public DbSet<GetPreviewMatches> GetPreviewMatches { get; set; }
         public DbSet<MatchDetails> MatchDetails { get; set; }
 
-
-        private const string ConnectionString = @"Server=DESKTOP-55QSCEM\DEVSERVER;Database=MarketsTask;Integrated Security=True;";
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            optionsBuilder.UseSqlServer(GlobalConstants.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

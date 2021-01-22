@@ -9,6 +9,7 @@
 <div class="container">
     @{
         int lastMainMarketsCounter = 0;
+        int lastMarketId = 0;
         string rowClass = "odd-bgcolor";
     }
     @foreach (var match in Model.ToList())
@@ -20,7 +21,7 @@
                 rowClass = "odd-bgcolor";
                 <div>
                     <div class="markets">
-                        @Html.ActionLink("SHOW ALL " + lastMainMarketsCounter + " MARKETS", "MatchInfo", "Home", new { id = match.MatchId }, new { @class = "info" })
+                        @Html.ActionLink("SHOW ALL " + lastMainMarketsCounter + " MARKETS", "MatchInfo", "Home", new { id = lastMarketId }, new { @class = "info" })
                     </div>
                 </div>
             }
@@ -33,6 +34,7 @@
             @if (match.MainRow == 1)
             {
                 lastMainMarketsCounter = match.AllMarkets;
+                lastMarketId = match.MatchId;
                 <div class="left-group">
                     <div>
                         @if (match.IsLive)

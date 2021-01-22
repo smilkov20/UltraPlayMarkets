@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Timers;
+
 using UltraPlayMarkets.Utilities;
 
 namespace UltraPlayMarkets
