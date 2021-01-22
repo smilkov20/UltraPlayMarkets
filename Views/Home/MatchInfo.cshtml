@@ -1,44 +1,44 @@
 ﻿@model List<UltraPlayMarkets.Models.MatchDetails>
 
-@{
-    ViewData["Title"] = "Match info";
-}
 
-
-<link rel="stylesheet" href="~/css/match.css" />
-
-<p class="testclass">test ffs</p>
+<link rel="stylesheet" href="~/css/details.css" />
 
 <div class="container">
-    <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+    <div class="group-header">
+        <a class="bottomNav" onclick="history.go(-1); return false;" href="#"><i class="arrow left"></i> Back</a><br />
+
+        <div class="header">
+            @Model.ToList().FirstOrDefault().PlayerOne VS @Model.ToList().FirstOrDefault().PlayerTwo
+        </div>
+    </div>
 </div>
 
-
 <div class="container">
+
     @foreach (var match in Model.ToList())
     {
-        <div class="grid-container">
-            <div class="grid-row">
+        <div class="row headerRow" id="">
+            <div>
                 @match.BetName
             </div>
-            <div class="grid-col">
-                <div>
-                    @match.HomecomingName
-                </div>
-                <div>
-                    @match.HomecomingValue
-                </div>
-                @if (match.GuestName != null)
-                {
-                    <div>
-                        @match.GuestValue
-                    </div>
-                    <div>
-                        @match.GuestName
-                    </div>
-                }
+        </div>
+        <div class="row detailRow" >
+            <div class="playerOne">
+                @match.HomecomingName
             </div>
+            <div class="coefficient">
+                @match.HomecomingValue
+            </div>
+            @if (match.GuestName != null)
+            {
+                <div class="coefficient">
+                    @match.GuestValue
+                </div>
+                <div class="playerTwo">
+                    @match.GuestName
+                </div>
+            }
 
         </div>
     }
-</div>
+</div> 

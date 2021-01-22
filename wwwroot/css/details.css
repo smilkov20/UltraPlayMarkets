@@ -1,0 +1,94 @@
+﻿body {
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+
+.group-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: medium;
+    border-color: yellow;
+}
+
+.header {
+    display: flex;
+    color: white;
+    font-size: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.bottomNav {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    background-color: #384351;
+    padding: 20px;
+}
+
+
+div.col-md-auto {
+    color: #bdbfc1;
+    background-color: #252c35;
+    min-height: 30px;
+}
+
+.headerRow {
+    background-color: #37414f;
+    height: 50px;
+    font-size: 20px;
+}
+
+.detailRow {
+    height: 80px;
+    line-height: 78px;
+    margin-bottom: 5px;
+    background-color: #252c35;
+    font-weight: bold;
+}
+
+.playerOne {
+    text-align: right;
+}
+
+.coefficient {
+    background-color: #11171f;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    padding: 5px;
+}
+
+.playerTwo {
+    text-align: left;
+}
+
+.row {
+    justify-content: center;
+    align-items: center;
+    color: white;
+    column-gap: 20px;
+}
