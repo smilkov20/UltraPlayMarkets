@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
+
 using UltraPlayMarkets.Models;
 using UltraPlayMarkets.Utilities;
 

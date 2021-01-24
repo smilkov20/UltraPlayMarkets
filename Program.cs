@@ -7,7 +7,7 @@ using UltraPlayMarkets.Utilities;
 
 namespace UltraPlayMarkets
 {
-    public class Program
+    public static class Program
     {
 
         private static readonly Timer _dataRefreshTimer = new Timer(60000); // 60 sec

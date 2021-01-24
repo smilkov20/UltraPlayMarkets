@@ -8,7 +8,7 @@
         <a class="bottomNav" onclick="history.go(-1); return false;" href="#"><i class="arrow left"></i> Back</a><br />
 
         <div class="header">
-            @Model.ToList().FirstOrDefault().PlayerOne VS @Model.ToList().FirstOrDefault().PlayerTwo
+            @Model.ToList().FirstOrDefault().HomecomingName VS @Model.ToList().FirstOrDefault().GuestName
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="row detailRow" >
             <div class="playerOne">
-                @match.HomecomingName
+                @match.PlayerOne
             </div>
             <div class="coefficient">
                 @match.HomecomingValue
@@ -35,7 +35,7 @@
                     @match.GuestValue
                 </div>
                 <div class="playerTwo">
-                    @match.GuestName
+                    @match.PlayerTwo
                 </div>
             }
 
