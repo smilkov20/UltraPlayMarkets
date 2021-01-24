@@ -1,0 +1,39 @@
+
+ALTER TABLE [dbo].[Odd]
+DROP CONSTRAINT [FK_Odd_Bet_BetId]
+GO
+ALTER TABLE [dbo].[Odd]  WITH CHECK ADD  CONSTRAINT [FK_Odd_Bet_BetId] FOREIGN KEY([BetId])
+REFERENCES [dbo].[Bet] ([Id]) ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[Odd] CHECK CONSTRAINT [FK_Odd_Bet_BetId]
+GO
+
+
+ALTER TABLE [dbo].[Bet]
+DROP CONSTRAINT [FK_Bet_Match_MatchId]
+GO
+ALTER TABLE [dbo].[Bet]  WITH CHECK ADD  CONSTRAINT [FK_Bet_Match_MatchId] FOREIGN KEY([MatchId])
+REFERENCES [dbo].[Match] ([Id]) ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[Bet] CHECK CONSTRAINT [FK_Bet_Match_MatchId]
+GO
+
+
+ALTER TABLE [dbo].[Match]
+DROP CONSTRAINT [FK_Match_Event_EventID]
+GO
+ALTER TABLE [dbo].[Match]  WITH CHECK ADD  CONSTRAINT [FK_Match_Event_EventID] FOREIGN KEY([EventID])
+REFERENCES [dbo].[Event] ([ID]) ON DELETE CASCADE;
+GO
+ALTER TABLE [dbo].[Match] CHECK CONSTRAINT [FK_Match_Event_EventID]
+GO
+
+
+ALTER TABLE [dbo].[Event]
+DROP CONSTRAINT [FK_Event_Sports_SportId]
+GO
+ALTER TABLE [dbo].[Event]  WITH CHECK ADD  CONSTRAINT [FK_Event_Sports_SportId] FOREIGN KEY([SportId])
+REFERENCES [dbo].[Sports] ([Id])
+GO
+ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Sports_SportId]
+GO
